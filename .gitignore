@@ -1,5 +1,4 @@
 *.userprefs
 *.swp
-*.plist
 bin/
 obj/
