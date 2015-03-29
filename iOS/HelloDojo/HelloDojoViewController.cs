@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Drawing;
-using Foundation;
 using UIKit;
 using Assisticant.Binding;
 
@@ -52,15 +50,7 @@ namespace HelloDojo
             _bindings.BindText(passwordTextField, () => _userLogin.UserLoginModel.Password, s => _userLogin.UserLoginModel.Password = s);
             _bindings.BindText(welcomeLabel, () => _userLogin.Message);
 
-            Func<string, string, bool> enableLogin = (a, b) =>
-            {
-                if (string.IsNullOrEmpty(a) || string.IsNullOrEmpty(b))
-                    return false;
-                return true;
-            };
-
-                _bindings.BindCommand(loginButton, 
-                                      () => _userLogin.Login(), 
+            _bindings.BindCommand(loginButton, _userLogin.Login, 
                 () => !string.IsNullOrEmpty(_userLogin.UserLoginModel.UserName) && !string.IsNullOrEmpty(_userLogin.UserLoginModel.Password));
 		}
 

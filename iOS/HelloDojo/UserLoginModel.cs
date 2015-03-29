@@ -1,5 +1,4 @@
-﻿using System;
-using Assisticant.Fields;
+﻿using Assisticant.Fields;
 
 namespace HelloDojo
 {
