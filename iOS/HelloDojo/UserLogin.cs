@@ -1,31 +1,20 @@
-﻿using System;
+﻿using Assisticant.Fields;
 
 namespace HelloDojo
 {
     public class UserLogin
     {
-        private string _userName;
-        private string _password;
-        private string _message;
-
-        public string UserName {
-            get { return _userName; }
-            set { _userName = value; }
-        }
-
-        public string Password {
-            get { return _password; }
-            set { _password = value; }
-        }
+        public UserLoginModel UserLoginModel = new UserLoginModel();
+        private Observable<string> _message = new Observable<string>();
 
         public void Login() {
-            _message = string.Format (
+            _message.Value = string.Format (
                 "Welcome, {0}, your password is {1}",
-                _userName, _password);
+                UserLoginModel.UserName, UserLoginModel.Password);
         }
 
         public string Message {
-            get { return _message; }
+            get { return _message.Value; }
         }
     }
 }

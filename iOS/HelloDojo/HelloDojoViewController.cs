@@ -1,13 +1,17 @@
 ﻿using System;
 using System.Drawing;
-
 using Foundation;
 using UIKit;
+using Assisticant.Binding;
+
 
 namespace HelloDojo
 {
 	public partial class HelloDojoViewController : UIViewController
 	{
+
+        private BindingManager _bindings = new BindingManager();
+
 		private UserLogin _userLogin = new UserLogin();
 
 		static bool UserInterfaceIdiomIsPhone {
@@ -32,10 +36,7 @@ namespace HelloDojo
 		{
 			base.ViewDidLoad ();
 
-			userNameTextField.Text = _userLogin.UserName;
-			passwordTextField.Text = _userLogin.Password;
-			welcomeLabel.Text = _userLogin.Message;
-			loginButton.TouchUpInside += LoginButton_TouchUpInside;
+            _bindings.Initialize(this);
 		}
 
 		public override void ViewWillAppear (bool animated)
@@ -46,6 +47,21 @@ namespace HelloDojo
 		public override void ViewDidAppear (bool animated)
 		{
 			base.ViewDidAppear (animated);
+
+            _bindings.BindText(userNameTextField, () => _userLogin.UserLoginModel.UserName, s => _userLogin.UserLoginModel.UserName = s);
+            _bindings.BindText(passwordTextField, () => _userLogin.UserLoginModel.Password, s => _userLogin.UserLoginModel.Password = s);
+            _bindings.BindText(welcomeLabel, () => _userLogin.Message);
+
+            Func<string, string, bool> enableLogin = (a, b) =>
+            {
+                if (string.IsNullOrEmpty(a) || string.IsNullOrEmpty(b))
+                    return false;
+                return true;
+            };
+
+                _bindings.BindCommand(loginButton, 
+                                      () => _userLogin.Login(), 
+                () => !string.IsNullOrEmpty(_userLogin.UserLoginModel.UserName) && !string.IsNullOrEmpty(_userLogin.UserLoginModel.Password));
 		}
 
 		public override void ViewWillDisappear (bool animated)
@@ -54,19 +70,12 @@ namespace HelloDojo
 		}
 
 		public override void ViewDidDisappear (bool animated)
-		{
+        {            
+            _bindings.Unbind();
 			base.ViewDidDisappear (animated);
-		}
+        }
 
 		#endregion
-
-		void LoginButton_TouchUpInside(object sender, EventArgs e)
-		{
-			_userLogin.UserName = userNameTextField.Text;
-			_userLogin.Password = passwordTextField.Text;
-			_userLogin.Login ();
-			welcomeLabel.Text = _userLogin.Message;
-		}
 	}
 }
 

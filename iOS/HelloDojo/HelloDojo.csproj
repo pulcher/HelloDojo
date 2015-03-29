@@ -91,6 +91,12 @@
     <Reference Include="System.Xml" />
     <Reference Include="System.Core" />
     <Reference Include="Xamarin.iOS" />
+    <Reference Include="Assisticant">
+      <HintPath>..\packages\Assisticant.Starter.1.1.0\lib\Xamarin.iOS10\Assisticant.dll</HintPath>
+    </Reference>
+    <Reference Include="Assisticant.iOS">
+      <HintPath>..\packages\Assisticant.Starter.1.1.0\lib\Xamarin.iOS10\Assisticant.iOS.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <ImageAsset Include="Resources\Images.xcassets\AppIcons.appiconset\Contents.json" />
@@ -103,6 +109,7 @@
   <ItemGroup>
     <None Include="Info.plist" />
     <None Include="Entitlements.plist" />
+    <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Main.cs" />
@@ -112,6 +119,7 @@
       <DependentUpon>HelloDojoViewController.cs</DependentUpon>
     </Compile>
     <Compile Include="UserLogin.cs" />
+    <Compile Include="UserLoginModel.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
 </Project>
