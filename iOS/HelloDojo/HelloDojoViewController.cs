@@ -3,6 +3,7 @@ using System.Drawing;
 
 using Foundation;
 using UIKit;
+using Assisticant.Binding;
 
 namespace HelloDojo
 {
@@ -31,6 +32,9 @@ namespace HelloDojo
 		public override void ViewDidLoad ()
 		{
 			base.ViewDidLoad ();
+
+            var bindings = new BindingManager();
+            bindings.Initialize(this);
 
 			userNameTextField.Text = _userLogin.UserName;
 			passwordTextField.Text = _userLogin.Password;
