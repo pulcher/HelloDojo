@@ -16,7 +16,7 @@ namespace HelloDojo
 	{
 		private BindingManager _bindings = new BindingManager();
 
-		private UserLogin _userLogin = new UserLogin();
+		private LoginViewModel _viewModel = new LoginViewModel(new UserLogin());
 
 		protected override void OnCreate(Bundle bundle)
 		{
@@ -24,18 +24,31 @@ namespace HelloDojo
 
 			_bindings.Initialize(this);
 
+			// Set our view from the "main" layout resource
 			SetContentView(Resource.Layout.Main);
 
 			_bindings.BindText(
 				FindViewById<EditText>(Resource.Id.userName),
-				() => _userLogin.UserName,
-				s => _userLogin.UserName = s);
+				() => _viewModel.UserName,
+				s => _viewModel.UserName = s);
+			_bindings.BindText(
+				FindViewById<TextView>(Resource.Id.password),
+				() => _viewModel.Password,
+				s => _viewModel.Password = s);
 			_bindings.BindCommand(
 				FindViewById<Button>(Resource.Id.myButton),
-				() => _userLogin.Login());
+				() => _viewModel.Login(),
+				() => _viewModel.CanLogIn);
 			_bindings.BindText(
 				FindViewById<TextView>(Resource.Id.welcome),
-				() => _userLogin.Message);
+				() => _viewModel.Welcome);
+		}
+
+		protected override void OnDestroy()
+		{
+			base.OnDestroy();
+
+			_bindings.Unbind();
 		}
 	}
 }
