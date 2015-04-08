@@ -1,14 +1,18 @@
-﻿using System;
+using System;
 using System.Drawing;
 
 using Foundation;
 using UIKit;
 using Assisticant.Binding;
 
+using Assisticant.Binding;
+
 namespace HelloDojo
 {
 	public partial class HelloDojoViewController : UIViewController
 	{
+        private BindingManager _bindings = new BindingManager();
+
 		private UserLogin _userLogin = new UserLogin();
 
 		static bool UserInterfaceIdiomIsPhone {
@@ -33,18 +37,20 @@ namespace HelloDojo
 		{
 			base.ViewDidLoad ();
 
-            var bindings = new BindingManager();
-            bindings.Initialize(this);
-
-			userNameTextField.Text = _userLogin.UserName;
-			passwordTextField.Text = _userLogin.Password;
-			welcomeLabel.Text = _userLogin.Message;
-			loginButton.TouchUpInside += LoginButton_TouchUpInside;
+            _bindings.Initialize(this);
 		}
 
 		public override void ViewWillAppear (bool animated)
 		{
 			base.ViewWillAppear (animated);
+
+            _bindings.BindText(userNameTextField,
+                () => _userLogin.UserName,
+                s => _userLogin.UserName = s);
+            _bindings.BindCommand(loginButton,
+                () => _userLogin.Login());
+            _bindings.BindText(welcomeLabel,
+                () => _userLogin.Message);
 		}
 
 		public override void ViewDidAppear (bool animated)
@@ -63,14 +69,6 @@ namespace HelloDojo
 		}
 
 		#endregion
-
-		void LoginButton_TouchUpInside(object sender, EventArgs e)
-		{
-			_userLogin.UserName = userNameTextField.Text;
-			_userLogin.Password = passwordTextField.Text;
-			_userLogin.Login ();
-			welcomeLabel.Text = _userLogin.Message;
-		}
 	}
 }
 
