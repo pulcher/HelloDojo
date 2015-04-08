@@ -1,9 +1,8 @@
-using System;
+﻿using System;
 using System.Drawing;
 
 using Foundation;
 using UIKit;
-using Assisticant.Binding;
 
 using Assisticant.Binding;
 
@@ -13,7 +12,7 @@ namespace HelloDojo
 	{
         private BindingManager _bindings = new BindingManager();
 
-		private UserLogin _userLogin = new UserLogin();
+        private LoginViewModel _viewModel = new LoginViewModel(new UserLogin());
 
 		static bool UserInterfaceIdiomIsPhone {
 			get { return UIDevice.CurrentDevice.UserInterfaceIdiom == UIUserInterfaceIdiom.Phone; }
@@ -45,12 +44,16 @@ namespace HelloDojo
 			base.ViewWillAppear (animated);
 
             _bindings.BindText(userNameTextField,
-                () => _userLogin.UserName,
-                s => _userLogin.UserName = s);
+                () => _viewModel.UserName,
+                s => _viewModel.UserName = s);
+            _bindings.BindText(passwordTextField,
+                () => _viewModel.Password,
+                s => _viewModel.Password = s);
             _bindings.BindCommand(loginButton,
-                () => _userLogin.Login());
+                () => _viewModel.Login(),
+                () => _viewModel.CanLogIn);
             _bindings.BindText(welcomeLabel,
-                () => _userLogin.Message);
+                () => _viewModel.Welcome);
 		}
 
 		public override void ViewDidAppear (bool animated)

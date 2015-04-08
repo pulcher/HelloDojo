@@ -127,6 +127,7 @@
       <DependentUpon>HelloDojoViewController.cs</DependentUpon>
     </Compile>
     <Compile Include="UserLogin.cs" />
+    <Compile Include="LoginViewModel.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
 </Project>
