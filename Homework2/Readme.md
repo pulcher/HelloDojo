@@ -79,7 +79,7 @@ public class AddressBook
 }
 ```
 
-Notice that we are using `ObservableList<T>``. This comes from the namepace `Assisticant.Collections`. We return an enumerable of the people objects as `IEnumerable` so that they cannot be changed through the property. The only way to change the list is to call `NewPerson()`.
+Notice that we are using `ObservableList<T>` This comes from the namepace `Assisticant.Collections`. We return an enumerable of the people objects as `IEnumerable` so that they cannot be changed through the property. The only way to change the list is to call `NewPerson()`.
 
 Now, what is a Person? It’s just an object with a name:
 
