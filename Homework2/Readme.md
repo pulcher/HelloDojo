@@ -5,7 +5,17 @@ I tried recording last night, but lost the video due to an error in my rig. So I
 
 ## Setup
 
-To get the latest, you will need to add a remote to the upstream repository. If you’ve used GitHub for Windows to clone your fork, then you might already have a remote called “michaellperry”. You can check with “git remote –v”. If it’s not there, add it with “git remote add michaellperry git@github.com:michaellperry/HelloDojo.git”.
+To get the latest, you will need to add a remote to the upstream repository. If you’ve used GitHub for Windows to clone your fork, then you might already have a remote called `michaellperry`. You can check with: 
+
+```
+git remote –v
+```
+
+If it’s not there, add it with:
+
+```
+git remote add michaellperry git@github.com:michaellperry/HelloDojo.git
+```
 
 Once you have the remote, you will need a clean master branch to pull into. If you’ve already done some work in master, then you’ll need to clean it up first.
 
@@ -42,7 +52,7 @@ Now, on to the content.
 
 The Lister solution is in the iOS or Android folder. This solution has a view already built for you. It contains an edit box and a button where you can enter a name. Then it contains a list for all of the names that have been entered. We want to bind this UI to a set of models.
 
-Let’s start with the AddressBook. Create a folder called “Models”, and in that folder create a class called AddressBook. This class will contain a list of people.
+Let’s start with the AddressBook. Create a folder called `Models`, and in that folder create a class called `AddressBook`. This class will contain a list of people.
 
 ```c#
 public class AddressBook
@@ -97,7 +107,7 @@ public class Person
 }
 ```
 
-Now we can data bind this list through the view model. Create a folder called ViewModels and add the AddressBookViewModelClass:
+Now we can data bind this list through the view model. Create a folder called ViewModels and add the `AddressBookViewModel` class:
 
 
 ```c#
