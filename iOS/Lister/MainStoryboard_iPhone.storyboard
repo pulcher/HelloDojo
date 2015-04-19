@@ -60,18 +60,11 @@
                                         </view>
                                     </tableViewCell>
                                 </prototypes>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="320" id="79"/>
-                                    <constraint firstAttribute="height" constant="474" id="80"/>
-                                </constraints>
                             </tableView>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="" borderStyle="roundedRect" minimumFontSize="17" id="73" translatesAutoresizingMaskIntoConstraints="NO" placeholder="WHAT YO NAME JERKFACE!?">
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="" borderStyle="roundedRect" minimumFontSize="17" id="73" translatesAutoresizingMaskIntoConstraints="NO" placeholder="Name">
                                 <rect key="frame" x="12" y="43" width="226" height="30"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="226" id="76"/>
-                                </constraints>
                             </textField>
                         </subviews>
                         <constraints>
@@ -81,6 +74,9 @@
                             <constraint id="75" firstItem="73" firstAttribute="top" secondItem="kh9-bI-dsS" secondAttribute="top" constant="43"/>
                             <constraint firstItem="kh9-bI-dsS" firstAttribute="bottom" secondItem="7" secondAttribute="bottom" constant="0.0" id="77"/>
                             <constraint id="78" firstItem="kh9-bI-dsS" firstAttribute="trailing" secondItem="7" secondAttribute="trailing" constant="0.0"/>
+                            <constraint firstItem="7" firstAttribute="top" secondItem="73" secondAttribute="bottom" constant="21" id="84"/>
+                            <constraint firstItem="6" firstAttribute="leading" secondItem="73" secondAttribute="trailing" constant="16" id="87"/>
+                            <constraint firstItem="7" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leading" constant="0.0" id="89"/>
                         </constraints>
                     </view>
                     <connections>
@@ -91,6 +87,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
             </objects>
+            <point key="canvasLocation" x="0.0" y="0.0"/>
         </scene>
     </scenes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
