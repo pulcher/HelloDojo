@@ -12,9 +12,13 @@ namespace WeatherApp
     {
         DataSource dataSource;
 
+        partial void InitializeViewModelLocator();
+
         public MasterViewController(IntPtr handle)
             : base(handle)
         {
+            InitializeViewModelLocator();
+
             Title = NSBundle.MainBundle.LocalizedString("Master", "Master");
 			
             if (UIDevice.CurrentDevice.UserInterfaceIdiom == UIUserInterfaceIdiom.Pad)

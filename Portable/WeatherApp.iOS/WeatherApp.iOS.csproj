@@ -124,6 +124,7 @@
     <Compile Include="DetailViewController.designer.cs">
       <DependentUpon>DetailViewController.cs</DependentUpon>
     </Compile>
+    <Compile Include="MasterViewController.Keys.cs" />
     <Compile Include="NewCityViewController.cs" />
     <Compile Include="NewCityViewController.designer.cs">
       <DependentUpon>NewCityViewController.cs</DependentUpon>
@@ -135,5 +136,8 @@
       <Project>{31C6CF10-A364-4095-B8C4-875CB69088BD}</Project>
       <Name>WeatherApp.Logic</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="readme.txt" />
   </ItemGroup>
 </Project>

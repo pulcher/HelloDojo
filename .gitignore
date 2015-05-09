@@ -1,5 +1,6 @@
 app.config
 Portable/WeatherApp.Android/Resources/values/Keys.xml
+Portable/WeatherApp.iOS/MasterViewController.Keys.cs
 packages/
 
 #ignore thumbnails created by windows
