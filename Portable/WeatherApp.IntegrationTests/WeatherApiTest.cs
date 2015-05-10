@@ -5,6 +5,7 @@ using WeatherApp.Logic.Models;
 using System.Linq;
 using System.Net.Http;
 using System.Configuration;
+using WeatherApp.Logic.Services;
 
 namespace WeatherApp.IntegrationTests
 {
@@ -22,6 +23,9 @@ namespace WeatherApp.IntegrationTests
 
 			var dallas = document.NewCity();
 			dallas.Name = "Dallas";
+
+		    var agent = new WeatherServiceAgent(http);
+            agent.Refresh(document);
 
 			Assert.AreEqual(7, dallas.Forecasts.Count());
 		}
