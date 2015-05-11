@@ -5,7 +5,7 @@ using System.Linq;
 using Foundation;
 using UIKit;
 
-namespace Lister
+namespace WeatherApp
 {
     public class Application
     {

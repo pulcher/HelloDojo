@@ -1,14 +1,14 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">iPhoneSimulator</Platform>
     <ProjectTypeGuids>{FEACFBD2-3405-455C-9665-78FE426C6842};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
-    <ProjectGuid>{33A43584-7E86-4ADA-9A81-0B09525E0C03}</ProjectGuid>
+    <ProjectGuid>{7B47C843-5415-49C4-B5A0-9AB2F90F126F}</ProjectGuid>
     <OutputType>Exe</OutputType>
-    <RootNamespace>Lister</RootNamespace>
+    <RootNamespace>WeatherApp</RootNamespace>
     <IPhoneResourcePrefix>Resources</IPhoneResourcePrefix>
-    <AssemblyName>Lister</AssemblyName>
+    <AssemblyName>WeatherApp</AssemblyName>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|iPhoneSimulator' ">
     <DebugSymbols>true</DebugSymbols>
@@ -22,6 +22,7 @@
     <MtouchArch>i386</MtouchArch>
     <MtouchLink>None</MtouchLink>
     <MtouchDebug>true</MtouchDebug>
+    <MtouchProfiling>true</MtouchProfiling>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|iPhoneSimulator' ">
     <DebugType>full</DebugType>
@@ -44,6 +45,7 @@
     <ConsolePause>false</ConsolePause>
     <MtouchArch>ARMv7, ARM64</MtouchArch>
     <CodesignEntitlements>Entitlements.plist</CodesignEntitlements>
+    <MtouchProfiling>true</MtouchProfiling>
     <CodesignKey>iPhone Developer</CodesignKey>
     <MtouchDebug>true</MtouchDebug>
   </PropertyGroup>
@@ -90,14 +92,16 @@
     <Reference Include="System.Core" />
     <Reference Include="Xamarin.iOS" />
     <Reference Include="Assisticant">
-      <HintPath>..\..\Lister\packages\Assisticant.Starter.1.1.0\lib\Xamarin.iOS10\Assisticant.dll</HintPath>
+      <HintPath>..\packages\Assisticant.Starter.1.1.0\lib\Xamarin.iOS10\Assisticant.dll</HintPath>
     </Reference>
     <Reference Include="Assisticant.iOS">
-      <HintPath>..\..\Lister\packages\Assisticant.Starter.1.1.0\lib\Xamarin.iOS10\Assisticant.iOS.dll</HintPath>
+      <HintPath>..\packages\Assisticant.Starter.1.1.0\lib\Xamarin.iOS10\Assisticant.iOS.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <ImageAsset Include="Resources\Images.xcassets\AppIcons.appiconset\Contents.json" />
+    <ImageAsset Include="Resources\Images.xcassets\AppIcons.appiconset\Contents.json">
+      <InProject>false</InProject>
+    </ImageAsset>
   </ItemGroup>
   <ItemGroup>
     <InterfaceDefinition Include="Resources\LaunchScreen.xib" />
@@ -112,19 +116,28 @@
   <ItemGroup>
     <Compile Include="Main.cs" />
     <Compile Include="AppDelegate.cs" />
-    <Compile Include="ListerViewController.cs" />
-    <Compile Include="ListerViewController.designer.cs">
-      <DependentUpon>ListerViewController.cs</DependentUpon>
+    <Compile Include="MasterViewController.cs" />
+    <Compile Include="MasterViewController.designer.cs">
+      <DependentUpon>MasterViewController.cs</DependentUpon>
     </Compile>
-    <Compile Include="Models\AddressBook.cs" />
-    <Compile Include="Models\Person.cs" />
-    <Compile Include="Models\PersonSelection.cs" />
-    <Compile Include="ViewModels\AddressBookViewModel.cs" />
-    <Compile Include="ViewModels\PersonViewModel.cs" />
+    <Compile Include="DetailViewController.cs" />
+    <Compile Include="DetailViewController.designer.cs">
+      <DependentUpon>DetailViewController.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MasterViewController.Keys.cs" />
+    <Compile Include="NewCityViewController.cs" />
+    <Compile Include="NewCityViewController.designer.cs">
+      <DependentUpon>NewCityViewController.cs</DependentUpon>
+    </Compile>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
   <ItemGroup>
-    <Folder Include="Models\" />
-    <Folder Include="ViewModels\" />
+    <ProjectReference Include="..\WeatherApp.Logic\WeatherApp.Logic.csproj">
+      <Project>{31C6CF10-A364-4095-B8C4-875CB69088BD}</Project>
+      <Name>WeatherApp.Logic</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="readme.txt" />
   </ItemGroup>
 </Project>
