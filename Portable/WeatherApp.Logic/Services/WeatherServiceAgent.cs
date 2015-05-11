@@ -19,35 +19,22 @@ namespace WeatherApp.Logic.Services
             _httpClient = httpClient;
         }
 
-        public void Refresh(Document document)
+        public async Task Refresh(Document document)
         {
             foreach (var city in document.Cities)
             {
-                var query = "";
-                Task task = null;
-                try
+                var response = await _httpClient.GetStringAsync(string.Format("?location={0}", city.Name));
+                var records = JsonConvert.DeserializeObject<IEnumerable<ForecastRecord>>(response);
+                foreach (var record in records)
                 {
-                    task = _httpClient.GetStringAsync(string.Format("?location={0}", city.Name))
-                        .ContinueWith(t =>
-                        {
-                            var records = JsonConvert.DeserializeObject<IEnumerable<ForecastRecord>>(t.Result);
-                            foreach (var record in records)
-                            {
-                                var forecast = city.NewForecast();
-                                forecast.Condition = record.condition;
-                                forecast.DayOfWeek = Enum.GetValues(typeof(DayOfWeek))
-                                    .Cast<DayOfWeek>()
-                                    .FirstOrDefault(d => d.ToString().StartsWith(record.day_of_week));
-                                forecast.High = record.high;
-                                forecast.Low = record.low;
-                            }
-                        });
+                    var forecast = city.NewForecast();
+                    forecast.Condition = record.condition;
+                    forecast.DayOfWeek = Enum.GetValues(typeof(DayOfWeek))
+                        .Cast<DayOfWeek>()
+                        .FirstOrDefault(d => d.ToString().StartsWith(record.day_of_week));
+                    forecast.High = record.high;
+                    forecast.Low = record.low;
                 }
-                catch (Exception e)
-                {
-                    Debug.WriteLine(e);
-                }
-                Task.WaitAll(task);
             }
         }
     }

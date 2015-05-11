@@ -13,19 +13,19 @@ namespace WeatherApp.IntegrationTests
 	public partial class WeatherApiTest
 	{
 		[Test()]
-		public void CanGetCurrentWeather()
+		public async Task CanGetCurrentWeather()
 		{
 			var document = new Document();
 			var http = new HttpClient();
 			string mashapeKey = ConfigurationManager.AppSettings["mashape-key"];
 			http.DefaultRequestHeaders.Add("X-Mashape-Key", mashapeKey);
-			http.BaseAddress = new Uri("https://george-vustrey-weather.p.mashape.com/", UriKind.Absolute);
+			http.BaseAddress = new Uri("https://george-vustrey-weather.p.mashape.com/api.php", UriKind.Absolute);
 
 			var dallas = document.NewCity();
 			dallas.Name = "Dallas";
 
 		    var agent = new WeatherServiceAgent(http);
-            agent.Refresh(document);
+            await agent.Refresh(document);
 
 			Assert.AreEqual(7, dallas.Forecasts.Count());
 		}
