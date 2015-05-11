@@ -23,7 +23,7 @@ namespace HelloDojo
 		}
 
 		public override void DidReceiveMemoryWarning ()
-		{
+        {
 			// Releases the view if it doesn't have a superview.
 			base.DidReceiveMemoryWarning ();
 			

@@ -87,12 +87,6 @@
     <CodesignKey>iPhone Distribution</CodesignKey>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Assisticant">
-      <HintPath>..\packages\Assisticant.Starter.1.0.16\lib\Xamarin.iOS10\Assisticant.dll</HintPath>
-    </Reference>
-    <Reference Include="Assisticant.iOS">
-      <HintPath>..\packages\Assisticant.Starter.1.0.16\lib\Xamarin.iOS10\Assisticant.iOS.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Xml" />
     <Reference Include="System.Core" />
