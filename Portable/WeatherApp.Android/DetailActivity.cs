@@ -24,6 +24,7 @@ namespace WeatherApp.Android
 			SetContentView(Resource.Layout.Detail);
 
             _bindings.Initialize(this);
+            ViewModelLocator.Initialize(Resources.GetString(Resource.String.MashapeKey));
 
             _viewModel = ViewModelLocator.Instance.City;
 
@@ -43,6 +44,8 @@ namespace WeatherApp.Android
                         row.FindViewById<TextView>(global::Android.Resource.Id.Text2),
                         () => forecast.Description);
                 });
+
+            _viewModel.Refresh();
 		}
 
         protected override void OnDestroy()

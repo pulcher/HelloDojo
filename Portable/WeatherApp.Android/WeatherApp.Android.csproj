@@ -82,8 +82,8 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Resources\values\keys.xml">
+    <AndroidResource Include="Resources\values\keys.xml">
       <SubType>Designer</SubType>
-    </Content>
+    </AndroidResource>
   </ItemGroup>
 </Project>

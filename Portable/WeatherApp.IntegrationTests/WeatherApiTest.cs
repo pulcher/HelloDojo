@@ -24,8 +24,8 @@ namespace WeatherApp.IntegrationTests
 			var dallas = document.NewCity();
 			dallas.Name = "Dallas";
 
-		    var agent = new WeatherServiceAgent(http);
-            await agent.Refresh(document);
+		    var agent = new WeatherServiceAgent(document, http);
+            await agent.Refresh();
 
 			Assert.AreEqual(7, dallas.Forecasts.Count());
 		}

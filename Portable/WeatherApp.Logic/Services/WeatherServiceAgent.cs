@@ -12,16 +12,18 @@ namespace WeatherApp.Logic.Services
 {
     public class WeatherServiceAgent
     {
+        private readonly Document _document;
         private readonly HttpClient _httpClient;
-
-        public WeatherServiceAgent(HttpClient httpClient)
+        
+        public WeatherServiceAgent(Document document, HttpClient httpClient)
         {
+            _document = document;
             _httpClient = httpClient;
         }
 
-        public async Task Refresh(Document document)
+        public async Task Refresh()
         {
-            foreach (var city in document.Cities)
+            foreach (var city in _document.Cities)
             {
                 var response = await _httpClient.GetStringAsync(string.Format("?location={0}", city.Name));
                 var records = JsonConvert.DeserializeObject<IEnumerable<ForecastRecord>>(response);
