@@ -14,8 +14,32 @@ namespace WeatherApp
 	[Register ("NewCityViewController")]
 	partial class NewCityViewController
 	{
+		[Outlet]
+		[GeneratedCode ("iOS Designer", "1.0")]
+		UIButton CancelButton { get; set; }
+
+		[Outlet]
+		[GeneratedCode ("iOS Designer", "1.0")]
+		UITextField CityName { get; set; }
+
+		[Outlet]
+		[GeneratedCode ("iOS Designer", "1.0")]
+		UIButton OkButton { get; set; }
+
 		void ReleaseDesignerOutlets ()
 		{
+			if (CancelButton != null) {
+				CancelButton.Dispose ();
+				CancelButton = null;
+			}
+			if (CityName != null) {
+				CityName.Dispose ();
+				CityName = null;
+			}
+			if (OkButton != null) {
+				OkButton.Dispose ();
+				OkButton = null;
+			}
 		}
 	}
 }

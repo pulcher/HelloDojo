@@ -1,14 +1,43 @@
+using Assisticant.Binding;
 using Foundation;
 using System;
 using System.CodeDom.Compiler;
 using UIKit;
+using WeatherApp.Logic.ViewModels;
 
 namespace WeatherApp
 {
 	partial class NewCityViewController : UIViewController
 	{
+        private NewCityViewModel _viewModel = ViewModelLocator.Instance.NewCity;
+        private BindingManager _bindings = new BindingManager();
+
 		public NewCityViewController (IntPtr handle) : base (handle)
 		{
 		}
+
+        public override void ViewDidLoad()
+        {
+            base.ViewDidLoad();
+
+            _bindings.Initialize(this);
+        }
+
+        public override void ViewWillAppear(bool animated)
+        {
+            base.ViewWillAppear(animated);
+
+            _viewModel.CityName = null;
+
+            _bindings.BindText(
+                CityName,
+                () => _viewModel.CityName,
+                value => _viewModel.CityName = value);
+
+            _bindings.BindCommand(
+                OkButton,
+                () => _viewModel.AddCity(),
+                () => _viewModel.CanAddCity);
+        }
 	}
 }

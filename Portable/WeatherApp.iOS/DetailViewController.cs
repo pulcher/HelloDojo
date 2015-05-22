@@ -4,38 +4,18 @@ using System.Collections.Generic;
 
 using Foundation;
 using UIKit;
+using WeatherApp.Logic.ViewModels;
+using Assisticant.Binding;
 
 namespace WeatherApp
 {
     public partial class DetailViewController : UITableViewController
     {
-        UIPopoverController masterPopoverController;
-        object detailItem;
+        private CityViewModel _viewModel = ViewModelLocator.Instance.City;
+        private BindingManager _bindings = new BindingManager();
 
-        public DetailViewController(IntPtr handle)
-            : base(handle)
+        public DetailViewController(IntPtr handle) : base(handle)
         {
-        }
-
-        public void SetDetailItem(object newDetailItem)
-        {
-            if (detailItem != newDetailItem)
-            {
-                detailItem = newDetailItem;
-				
-                // Update the view
-                ConfigureView();
-            }
-			
-            if (masterPopoverController != null)
-                masterPopoverController.Dismiss(true);
-        }
-
-        void ConfigureView()
-        {
-            // Update the user interface for the detail item
-            if (IsViewLoaded && detailItem != null)
-                detailDescriptionLabel.Text = detailItem.ToString();
         }
 
         public override void DidReceiveMemoryWarning()
@@ -49,25 +29,40 @@ namespace WeatherApp
         public override void ViewDidLoad()
         {
             base.ViewDidLoad();
-			
-            // Perform any additional setup after loading the view, typically from a nib.
-            ConfigureView();
+
+            _bindings.Initialize(this);
         }
 
-        [Export("splitViewController:willHideViewController:withBarButtonItem:forPopoverController:")]
-        public void WillHideViewController(UISplitViewController splitController, UIViewController viewController, UIBarButtonItem barButtonItem, UIPopoverController popoverController)
+        public override void ViewWillAppear(bool animated)
         {
-            barButtonItem.Title = NSBundle.MainBundle.LocalizedString("Master", "Master");
-            NavigationItem.SetLeftBarButtonItem(barButtonItem, true);
-            masterPopoverController = popoverController;
+            base.ViewWillAppear(animated);
+
+            _viewModel.Refresh();
+
+            _bindings.Bind(
+                () => _viewModel.Name,
+                value => this.Title = value);
+
+            _bindings.BindItems(
+                TableView,
+                () => _viewModel.Forecasts,
+                (cell, forecast, bindings) =>
+                {
+                    bindings.BindText(
+                        cell.TextLabel,
+                        () => forecast.Text);
+	                if (cell.DetailTextLabel != null)
+	                    bindings.BindText(
+	                        cell.DetailTextLabel,
+	                        () => forecast.Description);
+                });
         }
 
-        [Export("splitViewController:willShowViewController:invalidatingBarButtonItem:")]
-        public void WillShowViewController(UISplitViewController svc, UIViewController vc, UIBarButtonItem button)
+        public override void ViewDidDisappear(bool animated)
         {
-            // Called when the view is shown again in the split view, invalidating the button and popover controller.
-            NavigationItem.SetLeftBarButtonItem(null, true);
-            masterPopoverController = null;
+            _bindings.Unbind();
+
+            base.ViewDidDisappear(animated);
         }
     }
 }
