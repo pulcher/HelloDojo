@@ -7,6 +7,7 @@ using Foundation;
 using UIKit;
 using WeatherApp.Logic.ViewModels;
 using Assisticant.Binding;
+using WeatherApp.Logic.Services;
 
 namespace WeatherApp
 {
@@ -15,14 +16,11 @@ namespace WeatherApp
         private MainViewModel _viewModel;
         private BindingManager _bindings = new BindingManager();
 
-        partial void InitializeViewModelLocator();
+        partial void InitializeViewModelLocator(IStorageService storageService);
 
         public MasterViewController(IntPtr handle)
             : base(handle)
         {
-            InitializeViewModelLocator();
-            _viewModel = ViewModelLocator.Instance.Main;
-
             Title = NSBundle.MainBundle.LocalizedString("Master", "Master");
 			
             if (UIDevice.CurrentDevice.UserInterfaceIdiom == UIUserInterfaceIdiom.Pad)
@@ -64,6 +62,9 @@ namespace WeatherApp
             NavigationItem.RightBarButtonItem = addButton;
 
             _bindings.Initialize(this);
+            InitializeViewModelLocator(new IosStorageService());
+
+            _viewModel = ViewModelLocator.Instance.Main;
         }
 
         public override void ViewWillAppear(bool animated)

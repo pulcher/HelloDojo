@@ -9,7 +9,7 @@ namespace WeatherApp
 {
 	partial class NewCityViewController : UIViewController
 	{
-        private NewCityViewModel _viewModel = ViewModelLocator.Instance.NewCity;
+        private NewCityViewModel _viewModel;
         private BindingManager _bindings = new BindingManager();
 
 		public NewCityViewController (IntPtr handle) : base (handle)
@@ -21,6 +21,7 @@ namespace WeatherApp
             base.ViewDidLoad();
 
             _bindings.Initialize(this);
+            _viewModel = ViewModelLocator.Instance.NewCity;
         }
 
         public override void ViewWillAppear(bool animated)

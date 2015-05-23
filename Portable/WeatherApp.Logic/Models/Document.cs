@@ -3,6 +3,7 @@ using Assisticant.Collections;
 using System.Collections.Generic;
 using System.Runtime.Serialization;
 using System.Linq;
+using WeatherApp.Logic.Services;
 
 namespace WeatherApp.Logic.Models
 {
@@ -26,6 +27,16 @@ namespace WeatherApp.Logic.Models
 		{
 			_cities.Remove(city);
 		}
+
+		public void Load(IEnumerable<CityMemento> cities)
+		{
+            throw new NotImplementedException();
+        }
+
+		public List<CityMemento> Save()
+		{
+            throw new NotImplementedException();
+        }
 	}
 }
 

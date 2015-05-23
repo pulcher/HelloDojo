@@ -2,6 +2,8 @@
 using Assisticant.Fields;
 using Assisticant.Collections;
 using System.Collections.Generic;
+using WeatherApp.Logic.Services;
+using System.Linq;
 
 namespace WeatherApp.Logic.Models
 {
@@ -32,6 +34,34 @@ namespace WeatherApp.Logic.Models
 		{
 			_forecasts.Clear();
 		}
+
+        public void LoadForecasts(IEnumerable<ForecastMemento> forecasts)
+        {
+            _forecasts.Clear();
+            foreach (var forecast in forecasts)
+            {
+                _forecasts.Add(new Forecast
+                {
+                    DayOfWeek = forecast.DayOfWeek,
+                    Condition = forecast.Condition,
+                    High = forecast.High,
+                    Low = forecast.Low
+                });
+            }
+        }
+
+        public List<ForecastMemento> SaveForecasts()
+        {
+            return _forecasts.Select(f =>
+                new ForecastMemento
+                {
+                    DayOfWeek = f.DayOfWeek,
+                    Condition = f.Condition,
+                    High = (int)f.High,
+                    Low = (int)f.Low
+                })
+                .ToList();
+        }
 	}
 }
 

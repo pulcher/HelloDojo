@@ -11,7 +11,7 @@ namespace WeatherApp
 {
     public partial class DetailViewController : UITableViewController
     {
-        private CityViewModel _viewModel = ViewModelLocator.Instance.City;
+        private CityViewModel _viewModel;
         private BindingManager _bindings = new BindingManager();
 
         public DetailViewController(IntPtr handle) : base(handle)
@@ -31,6 +31,7 @@ namespace WeatherApp
             base.ViewDidLoad();
 
             _bindings.Initialize(this);
+            _viewModel = ViewModelLocator.Instance.City;
         }
 
         public override void ViewWillAppear(bool animated)

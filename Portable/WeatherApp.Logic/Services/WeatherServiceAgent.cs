@@ -10,7 +10,7 @@ using WeatherApp.Logic.Models;
 
 namespace WeatherApp.Logic.Services
 {
-    public class WeatherServiceAgent
+    public class WeatherServiceAgent : IWeatherServiceAgent
     {
         private readonly Document _document;
         private readonly HttpClient _httpClient;

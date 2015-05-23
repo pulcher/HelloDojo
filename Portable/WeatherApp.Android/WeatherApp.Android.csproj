@@ -51,6 +51,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AndroidStorageService.cs" />
     <Compile Include="DetailActivity.cs" />
     <Compile Include="MasterActivity.cs" />
     <Compile Include="NewCityActivity.cs" />

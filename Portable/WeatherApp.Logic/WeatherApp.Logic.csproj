@@ -35,7 +35,13 @@
     <Compile Include="Models\Document.cs" />
     <Compile Include="Models\City.cs" />
     <Compile Include="Models\Forecast.cs" />
-    <Compile Include="Services\WeatherServiceAgent.cs" />
+    <Compile Include="Services\CityMemento.cs" />
+    <Compile Include="Services\DocumentMemento.cs" />
+    <Compile Include="Services\ForecastMemento.cs" />
+    <Compile Include="Services\ForecastRepository.cs" />
+    <Compile Include="Services\IStorageService.cs" />
+    <Compile Include="Services\IWeatherServiceAgent.cs" />
+    <Compile Include="Services\FakeWeatherServiceAgent.cs" />
     <Compile Include="ViewModels\CityViewModel.cs" />
     <Compile Include="ViewModels\ForecastViewModel.cs" />
     <Compile Include="ViewModels\ViewModelLocator.cs" />
@@ -48,9 +54,6 @@
   <ItemGroup>
     <Reference Include="Assisticant">
       <HintPath>..\packages\Assisticant.Starter.1.1.0\lib\portable-net45+win+wp80+MonoAndroid10+Xamarin.iOS10\Assisticant.dll</HintPath>
-    </Reference>
-    <Reference Include="Newtonsoft.Json">
-      <HintPath>..\packages\Newtonsoft.Json.6.0.8\lib\portable-net45+wp80+win8+wpa81+aspnetcore50\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="System.Net.Http">
       <HintPath>C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\MonoAndroid\v1.0\System.Net.Http.dll</HintPath>

@@ -14,25 +14,31 @@ namespace WeatherApp.Logic.ViewModels
     {
         public static ViewModelLocator Instance { get; private set; }
 
-		public static void Initialize(string mashapeKey)
+		public static void Initialize(string mashapeKey, IStorageService storageService)
         {
             if (Instance == null)
-				Instance = new ViewModelLocator(mashapeKey);
+                Instance = new ViewModelLocator(mashapeKey, storageService);
         }
 
         private readonly Document _document;
+        private readonly IWeatherServiceAgent _weatherServiceAgent;
         private readonly CitySelection _citySelection;
+		private readonly IStorageService _storageService;
+		private readonly ForecastRepository _forecastRepository;
 
-        private HttpClient _httpClient;
+		private BindingManager _bindings = new BindingManager();
 
-		private ViewModelLocator(string mashapeKey)
+		private ViewModelLocator(string mashapeKey, IStorageService storageService)
         {
+			_storageService = storageService;
+
             _document = new Document();
             _citySelection = new CitySelection();
-   
-            _httpClient = new HttpClient();
-            _httpClient.BaseAddress = new Uri("https://george-vustrey-weather.p.mashape.com/api.php");
-            _httpClient.DefaultRequestHeaders.Add("X-Mashape-Key", mashapeKey);
+            _weatherServiceAgent = new FakeWeatherServiceAgent(_document);
+			_forecastRepository = new ForecastRepository(
+				_storageService,
+				_weatherServiceAgent,
+				_document);
         }
 
         public MainViewModel Main
@@ -52,7 +58,7 @@ namespace WeatherApp.Logic.ViewModels
 
                 return new CityViewModel(
 					_citySelection.SelectedCity,
-                    new WeatherServiceAgent(_document, _httpClient));
+					_forecastRepository);
             }
         }
 
@@ -62,7 +68,8 @@ namespace WeatherApp.Logic.ViewModels
             {
                 return new NewCityViewModel(
 					_document,
-					_citySelection);
+					_citySelection,
+                    _storageService);
             }
         }
     }
